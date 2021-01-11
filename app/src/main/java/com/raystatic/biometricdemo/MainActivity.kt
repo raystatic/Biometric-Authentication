@@ -74,14 +74,14 @@ class MainActivity:AppCompatActivity() {
             biometricPrompt =
                 BiometricPromptUtils.createBiometricPromt(
                     this,
-                    ::decryptServerTokenFromStorage
+                    ::decryptTokenFromStorage
                 )
             val promptInfo = BiometricPromptUtils.createPromtInfo(this)
             biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(cipher))
         }
     }
 
-    private fun decryptServerTokenFromStorage(authResult: BiometricPrompt.AuthenticationResult) {
+    private fun decryptTokenFromStorage(authResult: BiometricPrompt.AuthenticationResult) {
         ciphertextWrapper?.let { textWrapper ->
             authResult.cryptoObject?.cipher?.let {
                 val plaintext =
